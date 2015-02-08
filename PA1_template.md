@@ -28,7 +28,7 @@ Plot the histogram for total number of steps taken per day
 
 ```r
 ## Plot the histogram of 'total steps taken per day'
-with(aggr, hist(steps, breaks=seq(0,24000,3000), xlim=c(0,25000), ylim=c(0,20), main="Total steps taken per day"))
+with(aggr, hist(steps, breaks=seq(0,24000,3000), xlim=c(0,25000), ylim=c(0,20), main="Total number of steps taken each day"))
 ```
 
 ![](figure/unnamed-chunk-3-1.png) 
@@ -53,7 +53,7 @@ Plot the time series line graph of interval against average steps
 
 ```r
 ## Plot the time series line graph of 'average steps taken per interval'
-with(aggr2, plot(interval, steps, type='l'))
+with(aggr2, plot(interval, steps, type='l', main="Avg # of steps taken (avg across all days) Vs the 5-min intervals"))
 ```
 
 ![](figure/unnamed-chunk-5-1.png) 
@@ -66,6 +66,7 @@ max.steps <- with(aggr2, aggr2[steps==max(steps),])
 The interval of **835** contains the maximum number of steps in average (**206** steps).
 
 ## Imputing missing values
+### Strategy to fill in missing values
 Let's use daily average steps taken for each interval to replace the NAs in the original dataset since we have already obtained the average data.  
 The original dataset is duplicated and merged with the data frame with daily average steps taken for each interval by using the 'interval' column as index. This creates an additional column 'steps.y' containing the average values for each interval and the original column 'steps' is renamed as 'steps.x'.  
 Next, we copy column 'steps.y' to column 'steps.x' for only rows with NA.
@@ -86,7 +87,7 @@ Finally, perform the same functions as per the first part. To get the histogram.
 aggr3 <- aggregate(steps ~ date, dat2, sum)
 
 ## Plot the histogram of 'total steps taken per day'
-with(aggr3, hist(steps, breaks=seq(0,24000,3000), xlim=c(0,25000), ylim=c(0,25), main="Total steps taken per day"))
+with(aggr3, hist(steps, breaks=seq(0,24000,3000), xlim=c(0,25000), ylim=c(0,25), main="Total number of steps taken each day"))
 ```
 
 ![](figure/unnamed-chunk-7-1.png) 
